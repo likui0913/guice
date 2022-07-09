@@ -60,8 +60,7 @@ import java.util.Set;
  */
 public final class InternalInjectorCreator {
 
-  private final ContinuousStopwatch stopwatch =
-      new ContinuousStopwatch(Stopwatch.createUnstarted());
+  private final ContinuousStopwatch stopwatch = new ContinuousStopwatch(Stopwatch.createUnstarted());
   private final Errors errors = new Errors();
 
   private final Initializer initializer = new Initializer();
@@ -101,24 +100,30 @@ public final class InternalInjectorCreator {
       throw new AssertionError("Already built, builders are not reusable.");
     }
 
-    // Synchronize while we're building up the bindings and other injector data. This ensures that
-    // the JIT bindings in the parent injector don't change while we're being built
+    // 在我们构建绑定和其他注入器数据时进行同步。
+    // 这确保了父注入器中的 JIT 绑定在我们构建时不会改变
+    // Synchronize while we're building up the bindings and other injector data.
+    // This ensures that the JIT bindings in the parent injector don't change while we're being built
     synchronized (shellBuilder.lock()) {
+
       shells = shellBuilder.build(initializer, processedBindingData, stopwatch, errors);
+
       stopwatch.resetAndLog("Injector construction");
 
       initializeStatically();
+
     }
 
     injectDynamically();
 
     if (shellBuilder.getStage() == Stage.TOOL) {
-      // wrap the primaryInjector in a ToolStageInjector
-      // to prevent non-tool-friendy methods from being called.
+      // wrap the primaryInjector in a ToolStageInjector to prevent non-tool-friendy methods from being called.
+      // 将 primaryInjector 包装在 ToolStageInjector 中，以防止调用非工具友好的方法。
       return new ToolStageInjector(primaryInjector());
     } else {
       return primaryInjector();
     }
+
   }
 
   /** Initialize and validate everything. */
@@ -163,7 +168,10 @@ public final class InternalInjectorCreator {
     errors.throwCreationExceptionIfErrorsExist();
   }
 
-  /** Returns the injector being constructed. This is not necessarily the root injector. */
+  /**
+   * 返回正在构造的注入器。这不一定是根注入器。
+   * Returns the injector being constructed. This is not necessarily the root injector.
+   */
   private Injector primaryInjector() {
     return shells.get(0).getInjector();
   }

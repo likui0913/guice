@@ -17,6 +17,7 @@
 package com.google.inject;
 
 /**
+ * 我们正在运行的阶段。
  * The stage we're running in.
  *
  * @author crazybob@google.com (Bob Lee)
@@ -24,6 +25,7 @@ package com.google.inject;
 public enum Stage {
 
   /**
+   * 我们在一个工具中运行（例如一个 IDE 插件）
    * We're running in a tool (an IDE plugin for example). We need binding meta data but not a
    * functioning Injector. Do not inject members of instances. Do not load eager singletons. Do as
    * little as possible so our tools run nice and snappy. Injectors created in this stage cannot be
@@ -32,11 +34,14 @@ public enum Stage {
   TOOL,
 
   /**
-   * We want fast startup times at the expense of runtime performance and some up front error
-   * checking.
+   * 我们想要以牺牲运行时性能和一些预先错误检查为代价的快速启动时间。
+   * We want fast startup times at the expense of runtime performance and some up front error checking.
    */
   DEVELOPMENT,
 
-  /** We want to catch errors as early as possible and take performance hits up front. */
+  /**
+   * 我们希望尽早发现错误并提前处理性能问题。
+   * We want to catch errors as early as possible and take performance hits up front.
+   */
   PRODUCTION
 }

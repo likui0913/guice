@@ -25,6 +25,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * 构建构成应用程序的对象图。
  * Builds the graphs of objects that make up your application. The injector tracks the dependencies
  * for each type and uses bindings to inject them. This is the core of Guice, although you rarely
  * interact with it directly. This "behind-the-scenes" operation is what distinguishes dependency
@@ -162,8 +163,9 @@ public interface Injector {
   <T> List<Binding<T>> findBindingsByType(TypeLiteral<T> type);
 
   /**
-   * Returns the provider used to obtain instances for the given injection key. When feasible, avoid
-   * using this method, in favor of having Guice inject your dependencies ahead of time.
+   * 返回用于获取给定注入密钥的实例的提供程序。
+   * Returns the provider used to obtain instances for the given injection key.
+   * When feasible, avoid using this method, in favor of having Guice inject your dependencies ahead of time.
    *
    * @throws ConfigurationException if this injector cannot find or create the provider.
    * @see Binder#getProvider(Key) for an alternative that offers up front error detection
@@ -180,19 +182,20 @@ public interface Injector {
   <T> Provider<T> getProvider(Class<T> type);
 
   /**
-   * Returns the appropriate instance for the given injection key; equivalent to {@code
-   * getProvider(key).get()}. When feasible, avoid using this method, in favor of having Guice
-   * inject your dependencies ahead of time.
-   *
+   * Returns the appropriate instance for the given injection key; equivalent to {@code getProvider(key).get()}.
+   * 返回给定注入密钥的适当实例；相当于 getProvider
+   * When feasible, avoid using this method, in favor of having Guice inject your dependencies ahead of time.
+   * 如果可行，请避免使用此方法，而是让 Guice 提前注入您的依赖项。
    * @throws ConfigurationException if this injector cannot find or create the provider.
    * @throws ProvisionException if there was a runtime failure while providing an instance.
    */
   <T> T getInstance(Key<T> key);
 
   /**
-   * Returns the appropriate instance for the given injection type; equivalent to {@code
-   * getProvider(type).get()}. When feasible, avoid using this method, in favor of having Guice
-   * inject your dependencies ahead of time.
+   * 返回给定注入类型的适当实例；相当于getProvider。
+   * 如果，请使用此方法，但让 Guice 提前放弃您的依赖项。
+   * Returns the appropriate instance for the given injection type; equivalent to {@code getProvider(type).get()}.
+   * When feasible, avoid using this method, in favor of having Guice inject your dependencies ahead of time.
    *
    * @throws ConfigurationException if this injector cannot find or create the provider.
    * @throws ProvisionException if there was a runtime failure while providing an instance.

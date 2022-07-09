@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * 在注入器创建时管理和注入实例。
  * Manages and injects instances at injector-creation time. This is made more complicated by
  * instances that request other instances while they're being injected. We overcome this by using
  * {@link Initializable}, which attempts to perform injection before use.

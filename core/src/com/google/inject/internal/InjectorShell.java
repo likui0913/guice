@@ -79,6 +79,7 @@ final class InjectorShell {
   }
 
   static class Builder {
+
     private final List<Element> elements = Lists.newArrayList();
     private final List<Module> modules = Lists.newArrayList();
 
@@ -135,15 +136,19 @@ final class InjectorShell {
     }
 
     /**
-     * Creates and returns the injector shells for the current modules. Multiple shells will be
-     * returned if any modules contain {@link Binder#newPrivateBinder private environments}. The
-     * primary injector will be first in the returned list.
+     * 创建并返回当前模块的注入器外壳。
+     * Creates and returns the injector shells for the current modules.
+     * Multiple shells will be returned if any modules contain {@link Binder#newPrivateBinder private environments}.
+     * 如果任何模块包含 newPrivateBinder 私有环境，将返回多个 shell
+     * The primary injector will be first in the returned list.
+     * 主喷油器将在返回列表中排在第一位。
      */
     List<InjectorShell> build(
         Initializer initializer,
         ProcessedBindingData processedBindingData,
         ContinuousStopwatch stopwatch,
         Errors errors) {
+
       checkState(stage != null, "Stage not initialized");
       checkState(privateElements == null || parent != null, "PrivateElements with no parent");
       checkState(bindingData != null, "no binding data. Did you remember to lock() ?");
@@ -151,6 +156,7 @@ final class InjectorShell {
           (privateElements == null && elements.isEmpty()) || modules.isEmpty(),
           "The shell is either built from modules (root) or from PrivateElements (children).");
 
+      // 如果这是一个顶级注入器，则绑定 Singleton
       // bind Singleton if this is a top-level injector
       if (parent == null) {
         modules.add(0, new RootModule());
@@ -159,10 +165,10 @@ final class InjectorShell {
       }
       elements.addAll(Elements.getElements(stage, modules));
 
-      // Check binding source restrictions only for the root shell (note that the root shell
-      // can have a parent Injector, when Injector.createChildInjector is called). It isn't
-      // necessary to call this check on child PrivateElements shells because it walks the entire
-      // tree of elements, recurring on PrivateElements.
+      // Check binding source restrictions only for the root shell (note that the root shell can have a parent Injector, when Injector.createChildInjector is called).
+      // It isn't necessary to call this check on child PrivateElements shells because it walks the entire tree of elements, recurring on PrivateElements.
+      // 仅检查根 shell 的绑定源限制（请注意，当调用 Injector.createChildInjector 时，根 shell 可以有一个父 Injector）。
+      // 没有必要在子 PrivateElements shell 上调用此检查，因为它遍历整个元素树，在 PrivateElements 上重复出现。
       if (privateElements == null) {
         elements.addAll(BindingSourceRestriction.check(GUICE_INTERNAL, elements));
       }

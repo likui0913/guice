@@ -102,13 +102,18 @@ final class InjectorImpl implements Injector, Lookups {
     }
   }
 
-  /** some limitations on what just in time bindings are allowed. */
+  /**
+   * 对允许的即时绑定有一些限制。
+   * some limitations on what just in time bindings are allowed.
+   */
   enum JitLimitation {
-    /** does not allow just in time bindings */
+    /** 不允许及时绑定 does not allow just in time bindings */
     NO_JIT,
-    /** allows existing just in time bindings, but does not allow new ones */
+    /** 允许现有的即时绑定，但不允许新的绑定
+     * allows existing just in time bindings, but does not allow new ones */
     EXISTING_JIT,
-    /** allows existing just in time bindings and allows new ones to be created */
+    /** 允许现有的即时绑定并允许创建新的绑定
+     * allows existing just in time bindings and allows new ones to be created */
     NEW_OR_EXISTING_JIT,
   }
 
@@ -1087,13 +1092,14 @@ final class InjectorImpl implements Injector, Lookups {
     return getProvider(Key.get(checkNotNull(type, "type")));
   }
 
-  <T> Provider<T> getProviderOrThrow(final Dependency<T> dependency, Errors errors)
-      throws ErrorsException {
+  <T> Provider<T> getProviderOrThrow(final Dependency<T> dependency, Errors errors) throws ErrorsException {
+
     Key<T> key = dependency.getKey();
     BindingImpl<? extends T> binding = getBindingOrThrow(key, errors, JitLimitation.NO_JIT);
     final InternalFactory<? extends T> internalFactory = binding.getInternalFactory();
 
     return new Provider<T>() {
+
       @Override
       public T get() {
         InternalContext currentContext = enterContext();
@@ -1111,6 +1117,7 @@ final class InjectorImpl implements Injector, Lookups {
       public String toString() {
         return internalFactory.toString();
       }
+
     };
   }
 
@@ -1123,8 +1130,7 @@ final class InjectorImpl implements Injector, Lookups {
       errors.throwIfNewErrors(0);
       return result;
     } catch (ErrorsException e) {
-      ConfigurationException exception =
-          new ConfigurationException(errors.merge(e.getErrors()).getMessages());
+      ConfigurationException exception = new ConfigurationException(errors.merge(e.getErrors()).getMessages());
       throw exception;
     }
   }
