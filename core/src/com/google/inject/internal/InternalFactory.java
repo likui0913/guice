@@ -19,6 +19,7 @@ package com.google.inject.internal;
 import com.google.inject.spi.Dependency;
 
 /**
+ * 创建将被注入的对象。
  * Creates objects which will be injected.
  *
  * @author crazybob@google.com (Bob Lee)

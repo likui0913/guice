@@ -21,6 +21,7 @@ import com.google.inject.spi.Dependency;
 import java.util.IdentityHashMap;
 
 /**
+ * 内部上下文。用于协调注入和支持循环依赖。
  * Internal context. Used to coordinate injections and support circular dependencies.
  *
  * @author crazybob@google.com (Bob Lee)
@@ -29,10 +30,11 @@ final class InternalContext implements AutoCloseable {
 
   private final InjectorOptions options;
 
-  private final IdentityHashMap<Object, ConstructionContext<?>> constructionContexts =
-      new IdentityHashMap<>();
+  private final IdentityHashMap<Object, ConstructionContext<?>> constructionContexts = new IdentityHashMap<>();
 
-  /** Keeps track of the type that is currently being requested for injection. */
+  /**
+   * 跟踪当前请求注入的类型。
+   * Keeps track of the type that is currently being requested for injection. */
   private Dependency<?> dependency;
 
   /**

@@ -37,7 +37,8 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 /**
- * Static methods for working with types that we aren't publishing in the public {@code Types} API.
+ * 用于处理我们未在公共类型 API 中发布的类型的静态方法。
+ * Static methods for working with types that we aren't publishing in the public Types API.
  *
  * @author jessewilson@google.com (Jesse Wilson)
  */

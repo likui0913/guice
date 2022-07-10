@@ -126,7 +126,9 @@ public final class InternalInjectorCreator {
 
   }
 
-  /** Initialize and validate everything. */
+  /** 初始化并验证所有内容。
+   * Initialize and validate everything.
+   */
   private void initializeStatically() {
     processedBindingData.initializeBindings();
     stopwatch.resetAndLog("Binding initialization");

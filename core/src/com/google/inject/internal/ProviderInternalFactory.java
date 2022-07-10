@@ -42,9 +42,10 @@ abstract class ProviderInternalFactory<T> implements InternalFactory<T> {
       final Dependency<?> dependency,
       @Nullable ProvisionListenerStackCallback<T> provisionCallback)
       throws InternalProvisionException {
+
     final ConstructionContext<T> constructionContext = context.getConstructionContext(this);
 
-    // We have a circular reference between constructors. Return a proxy.
+    // 我们在构造函数之间有一个循环引用。返回代理 We have a circular reference between constructors. Return a proxy.
     if (constructionContext.isConstructing()) {
       Class<?> expectedType = dependency.getKey().getTypeLiteral().getRawType();
       // TODO: if we can't proxy this object, can we proxy the other object?
@@ -83,11 +84,13 @@ abstract class ProviderInternalFactory<T> implements InternalFactory<T> {
       Dependency<?> dependency,
       ConstructionContext<T> constructionContext)
       throws InternalProvisionException {
+
     T t = provider.get();
     if (t == null && !dependency.isNullable()) {
       InternalProvisionException.onNullInjectedIntoNonNullableDependency(source, dependency);
     }
     constructionContext.setProxyDelegates(t);
     return t;
+
   }
 }

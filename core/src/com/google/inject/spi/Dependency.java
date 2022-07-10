@@ -50,8 +50,8 @@ public final class Dependency<T> {
   }
 
   /**
-   * Returns a new dependency that is not attached to an injection point. The returned dependency is
-   * nullable.
+   * Returns a new dependency that is not attached to an injection point. The returned dependency is nullable.
+   * 返回未附加到注入点的新依赖项。返回的依赖项可以为空。
    */
   public static <T> Dependency<T> get(Key<T> key) {
     return new Dependency<T>(null, MoreTypes.canonicalizeKey(key), true, -1);

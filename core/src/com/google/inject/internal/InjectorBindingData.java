@@ -46,8 +46,9 @@ import java.util.Optional;
 import java.util.Set;
 
 /**
- * A container that stores an injector's binding data. This excludes JIT binding data, which is
- * stored in {@link InjectorJitBindingData}.
+ * 存储喷油器绑定数据的容器。这不包括存储在InjectorJitBindingData中的JIT绑定数据
+ * A container that stores an injector's binding data. This excludes JIT binding data, which is stored in InjectorJitBindingData
+ *
  *
  * @author jessewilson@google.com (Jesse Wilson)
  */
@@ -58,8 +59,7 @@ class InjectorBindingData {
 
   // Must be a linked hashmap in order to preserve order of bindings in Modules.
   private final Map<Key<?>, Binding<?>> explicitBindingsMutable = Maps.newLinkedHashMap();
-  private final Map<Key<?>, Binding<?>> explicitBindings =
-      Collections.unmodifiableMap(explicitBindingsMutable);
+  private final Map<Key<?>, Binding<?>> explicitBindings = Collections.unmodifiableMap(explicitBindingsMutable);
   private final Map<Class<? extends Annotation>, ScopeBinding> scopes = Maps.newHashMap();
   private final Set<ProviderLookup<?>> providerLookups = Sets.newLinkedHashSet();
   private final Set<StaticInjectionRequest> staticInjectionRequests = Sets.newLinkedHashSet();
@@ -84,11 +84,14 @@ class InjectorBindingData {
 
   @SuppressWarnings("unchecked") // we only put in BindingImpls that match their key types
   public <T> BindingImpl<T> getExplicitBinding(Key<T> key) {
+
     Binding<?> binding = explicitBindings.get(key);
     if (binding == null && parent.isPresent()) {
       return parent.get().getExplicitBinding(key);
     }
+
     return (BindingImpl<T>) binding;
+
   }
 
   public Map<Key<?>, Binding<?>> getExplicitBindingsThisLevel() {

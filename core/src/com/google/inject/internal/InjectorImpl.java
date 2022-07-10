@@ -1102,6 +1102,7 @@ final class InjectorImpl implements Injector, Lookups {
 
       @Override
       public T get() {
+
         InternalContext currentContext = enterContext();
         try {
           T t = internalFactory.get(currentContext, dependency, false);
@@ -1164,9 +1165,8 @@ final class InjectorImpl implements Injector, Lookups {
   }
 
   /**
-   * Looks up thread local context and {@link InternalContext#enter() enters} it or creates a new
-   * context if necessary.
-   *
+   * 查找线程本地上下文并输入它或在必要时创建一个新上下文。
+   * Looks up thread local context and {@link InternalContext#enter() enters} it or creates a new context if necessary.
    * <p>All callers of this are responsible for calling {@link InternalContext#close()}. Typical
    * usage should look like:
    *

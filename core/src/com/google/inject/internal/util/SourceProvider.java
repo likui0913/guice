@@ -22,6 +22,7 @@ import com.google.common.collect.Lists;
 import java.util.List;
 
 /**
+ * 提供对调用代码行的访问。
  * Provides access to the calling line of code.
  *
  * @author crazybob@google.com (Bob Lee)

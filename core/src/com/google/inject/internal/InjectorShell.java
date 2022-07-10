@@ -339,13 +339,18 @@ final class InjectorShell {
     injector.getBindingData().putBinding(key, stageBinding);
   }
 
+  /**
+   * 根module
+   */
   private static class RootModule implements Module {
+
     @Override
     public void configure(Binder binder) {
       binder = binder.withSource(SourceProvider.UNKNOWN_SOURCE);
       binder.bindScope(Singleton.class, SINGLETON);
       binder.bindScope(javax.inject.Singleton.class, SINGLETON);
     }
+
   }
 
   private static class InheritedScannersModule implements Module {

@@ -174,6 +174,7 @@ public final class Elements {
   }
 
   private static class RecordingBinder implements Binder, PrivateBinder {
+
     private final Stage stage;
     private final Map<Module, ModuleInfo> modules;
     private final List<Element> elements;

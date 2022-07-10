@@ -31,6 +31,11 @@ import java.lang.reflect.Method;
 import org.aopalliance.intercept.MethodInterceptor;
 
 /**
+ * 收集配置信息，主要是用于创建注入器的绑定
+ * Guice 将此对象提供给您的应用程序的 Module 实现者，因此他们可以各自贡献自己的绑定和其他注册。
+ * Collects configuration information primarily bindings which will be used to create an Injector
+ * Guice provides this object to your application's Module implementors so they may each contribute their own bindings and other registrations.
+ *
  * Collects configuration information (primarily <i>bindings</i>) which will be used to create an
  * {@link Injector}. Guice provides this object to your application's {@link Module} implementors so
  * they may each contribute their own bindings and other registrations.

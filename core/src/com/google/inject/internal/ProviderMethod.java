@@ -40,6 +40,7 @@ import java.util.Set;
 import java.util.function.BiFunction;
 
 /**
+ * 调用方法并返回其结果的提供程序。
  * A provider that invokes a method and returns its result.
  *
  * @author jessewilson@google.com (Jesse Wilson)

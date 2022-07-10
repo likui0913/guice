@@ -57,8 +57,7 @@ public class GuiceObjectFactory extends ObjectFactory {
     try {
       // Instantiate user's module.
       @SuppressWarnings({"unchecked"})
-      Class<? extends Module> moduleClass =
-          (Class<? extends Module>) Class.forName(moduleClassName);
+      Class<? extends Module> moduleClass = (Class<? extends Module>) Class.forName(moduleClassName);
       this.module = moduleClass.getConstructor().newInstance();
     } catch (Exception e) {
       throw new RuntimeException(e);

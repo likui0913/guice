@@ -23,9 +23,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 /**
- * Associated to a {@link Module module}, provides the module class name, the parent module {@link
- * ModuleSource source}, and the call stack that ends just before the module {@link
- * Module#configure(Binder) configure(Binder)} method invocation.
+ * 与模块相关联，提供模块类名、父模块源以及在模块 Binder 配置方法调用之前结束的调用堆栈。
+ * Associated to a module, provides the module class name, the parent module source, and the call stack that ends just before the module Binder configure method invocation.
  */
 final class ModuleSource {
 
